@@ -1,11 +1,20 @@
+
 /* Change mode dark to light */
 document.getElementById('mode').addEventListener('change',(e) => {
-    document.querySelector('html').setAttribute(
-        'data-theme',
-        e.target.checked ? 'dark' : 'light'
-    )
+    const theme = e.target.checked ? 'dark' : 'light';
+    localStorage.setItem('theme',theme)
+    changeTheme();
 })
 
+function changeTheme(){
+    const theme = localStorage.getItem('theme');
+    if (!theme)return;
+    const mode = document.getElementById('mode');
+    mode.checked = theme === 'dark';
+    document.querySelector('html').setAttribute('data-theme',theme)
+}
+
+changeTheme();
 
 /* const notes  = []; */
 
@@ -57,19 +66,20 @@ function listNotes(type){
                 if (element.isCompleted == false) {
                     renderNotes(element,list)
                     i++;
+                    document.querySelector(`input[name="option"][value="active"]`).checked = true;
                 }
                 break;
             case 'completed':
                 if (element.isCompleted == true) {
                     renderNotes(element,list)
                     i++;    
+                    document.querySelector(`input[name="option"][value="completed"]`).checked = true;
                 }
                 break;
             default:
                 renderNotes(element,list)
                 i++;
                 document.querySelector(`input[name="option"][value="all"]`).checked = true;
-                document.querySelector(`input[name="option-mobile"][value="all"]`).checked = true;
                 break;
         }
         });
@@ -156,12 +166,38 @@ function renderNotes(element,list){
 
 
 /* Delete all notes */
-document.getElementById('clearAll').addEventListener('click',(x) => {
-    localStorage.removeItem('notes');
-    listNotes();
+document.getElementById('clearAll').addEventListener('click',() => {
+    let notes = JSON.parse(localStorage.getItem('notes')) ?? [];
+    const newNotes = notes.filter(x => x.isCompleted == true);
+    if (newNotes == 0) {
+        showMessage("No notes completed")
+        setTimeout(() => {
+            hiddenMessage();
+        }, 1000);
+        return;
+    }
+    clearShow();
 })
 
-/* Delete a note */
+document.getElementById('acceptClear').addEventListener('click',() => {
+    let notes = JSON.parse(localStorage.getItem('notes')) ?? [];
+    const newNotes = notes.filter(x => x.isCompleted != true);
+    if (newNotes.length > 0) {
+        localStorage.setItem('notes',JSON.stringify(newNotes))
+    }else{
+        localStorage.removeItem('notes');
+    }
+    listNotes();
+    clearClose();
+    showMessage("Notes completed successfully deleted")
+    setTimeout(() => {
+        hiddenMessage();
+    }, 1000);
+})
+
+
+
+/* Delete a note  */
 
 let idNote;
 async function deleteNote(id){
@@ -258,7 +294,20 @@ document.getElementById('closeChange').addEventListener('click',() =>{
     changeClose();
 })
 
-
+/* Clear - show */
+function clearShow(){
+    document.getElementById('main').classList.add('opacity-15');
+    document.getElementById('dialogClear').classList.remove('hidden');
+}
+/* Clear - hidden */
+function clearClose(){
+    document.getElementById('main').classList.remove('opacity-15');
+    document.getElementById('dialogClear').classList.add('hidden');
+}
+/* Clear - close */
+document.getElementById('closeClear').addEventListener('click',() =>{
+    clearClose();
+})
 
 /* Show message */
 function showMessage(text){

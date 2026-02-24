@@ -50,59 +50,41 @@
 
           <span id="errorText" class="hidden text-sm text-center text-gray-50 mt-5" >The text must have at least 1 character</span>
 
-          <ul id="list" class="mt-6 bg-white dark:bg-navy-900 rounded-lg  shadow-2xl flex flex-col-reverse">
-
-            <li 
-            id="options"
-            class=" px-4 py-3 flex justify-between items-center">
-              <p 
-              id="numberNotes"
-              class="text-gray-600 font-medium text-base" ></p>
-
-              <div class="hidden lg:block">
-                <article 
-                id="types"
-                class=" flex space-x-7 ">
-                  <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
-                    <input type="radio" name="option" checked value="all" class="hidden">
-                    <h4 class="cursor-pointer text-base font-semibold" onclick="changeType('all')"  >All</h4>
-                  </label>
-                  <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
-                    <input type="radio" name="option" value="active" class="hidden">
-                    <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('active')" >Active</h4>
-                  </label>
-                  <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
-                    <input type="radio" name="option" value="completed" class="hidden">
-                    <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('completed')" >Completed</h4>
-                  </label>
-                </article>
-              </div>
-
-              <p 
-              id="clearAll"
-              class="text-gray-600 font-medium text-base cursor-pointer hover:text-navy-850">Clear Completed</p>
-            </li>
-
-          </ul>
+          <ul id="list" class="mt-6 bg-white dark:bg-navy-900 rounded-lg  shadow-2xl flex flex-col-reverse"></ul>
 
         </article>
 
-      <article 
-      id="types"
-      class="bg-white border rounded-lg border-gray-300 dark:bg-navy-900 dark:border-0 py-3 shadow-2xl flex justify-evenly mt-6 lg:hidden">
-        <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
-          <input type="radio" name="option-mobile" checked value="all" class="hidden">
-          <h4 class="cursor-pointer text-base font-semibold" onclick="changeType('all')"  >All</h4>
-        </label>
-        <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
-          <input type="radio" name="option" value="active" class="hidden">
-          <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('active')" >Active</h4>
-        </label>
-        <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
-          <input type="radio" name="option" value="completed" class="hidden">
-          <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('completed')" >Completed</h4>
-        </label>
-      </article>
+        <article 
+        id="options"
+        class="grid grid-cols-2 md:grid-cols-4 gap-y-10">
+          <div class="bg-white dark:bg-navy-900 py-3 px-4 rounded-bl-lg shadow flex items-center">
+            <p id="numberNotes" class="order-1 text-gray-600 font-medium text-base"></p>
+          </div>
+          <div 
+          class="order-last col-span-2 md:order-0 bg-white border border-gray-300 dark:bg-navy-900 dark:border-0 rounded-lg  px-4 py-3
+          md:border-0 md:rounded-none flex items-center shadow  md:shadow-[6px_8px_3px_-5px_rgba(0,0,0,0.1)]
+          ">
+            <article 
+              id="types"
+              class="flex justify-evenly w-full">
+                <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+                  <input type="radio" name="option" checked value="all" class="hidden">
+                  <h4 class="cursor-pointer text-base font-semibold" onclick="changeType('all')"  >All</h4>
+                </label>
+                <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+                  <input type="radio" name="option" value="active" class="hidden">
+                  <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('active')" >Active</h4>
+                </label>
+                <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+                  <input type="radio" name="option" value="completed" class="hidden">
+                  <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('completed')" >Completed</h4>
+                </label>
+              </article>
+          </div>
+          <div class="bg-white dark:bg-navy-900 py-3 px-4 rounded-br-lg  shadow-[6px_8px_3px_-5px_rgba(0,0,0,0.1)] flex justify-end">
+            <p id="clearAll" class="order-0 text-gray-600 font-medium text-base cursor-pointer hover:text-navy-850 w-auto">Clear Completed</p>
+          </div>
+        </article>
 
     </section>
 
@@ -137,6 +119,20 @@
       type="button" class="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer" >Cancel</button>
       <button 
       id="acceptChange"
+      type="button" class="bg-navy-950 px-4 py-2 rounded-lg text-white cursor-pointer" >Continue</button>
+    </div>
+  </div>
+
+  <div 
+  id="dialogClear"
+  class="hidden bg-gray-50 border-2 border-gray-600 shadow-2xl space-y-5 w-4/5 sm:w-3/5 md:w-2/5  px-4 py-3 rounded-lg absolute transform top-1/5 -translate-y-1/5 left-1/2 -translate-x-1/2">
+    <h4 class="text-navy-950" >Do you want to continue with this procces?</h4>
+    <div class="flex justify-between">
+      <button 
+      id="closeClear"
+      type="button" class="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer" >Cancel</button>
+      <button 
+      id="acceptClear"
       type="button" class="bg-navy-950 px-4 py-2 rounded-lg text-white cursor-pointer" >Continue</button>
     </div>
   </div>
