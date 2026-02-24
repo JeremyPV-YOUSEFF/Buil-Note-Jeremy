@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import "tailwindcss";
+
+/* Dark mode */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme{
+
+    /* Font-family */
+
+    --font-josefin : "Josefin Sans", sans-serif;
+
+    /* Custome colors */
+    /* Ligth */
+    --color-gray-50: hsl(0, 0%, 98%);
+    --color-purple-300: hsl(234, 39%, 85%);
+    --color-gray-300: hsl(233, 11%, 84%);
+    --color-gray-600: hsl(236, 9%, 61%);
+    --color-navy-850: hsl(235, 19%, 35%);
+
+    /* Dark */
+    --color-navy-950: hsl(235, 21%, 11%);
+    --color-navy-900: hsl(235, 24%, 19%);
+    --color-purple-300: hsl(234, 39%, 85%);
+    --color-purple-100 : hsl(236, 33%, 92%);
+    --color-purple-600: hsl(235, 16%, 43%);
+    --color-purple-700: hsl(233, 14%, 35%);
+    --color-purple-800: hsl(237, 14%, 26%);
+    --color-purple: hsl(261, 94%, 73%);
+    --color-blue: hsl(204, 73%, 68%);
+    --color-gray-600-d: hsl(236, 9%, 61%);
+}
+
+:root{
+
+    --image-mobile-lg : url('../images/bg-mobile-light.jpg');
+    --image-mobile-dk : url('../images/bg-mobile-dark.jpg');
+    --image-desktop-lg : url('../images/bg-desktop-light.jpg');
+    --image-desktop-dk : url('../images/bg-desktop-dark.jpg');
+
+    --image-moon : url('../images/icon-moon.svg');
+    --image-sun : url('../images/icon-sun.svg');
+ 
+    --image-check : url('../images/icon-check.svg');
+    --image-x : url('../images/icon-cross.svg');
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Todo app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="font-josefin">
+
+  <div 
+  id="main"
+  class="relative w-screen h-screen dark:bg-navy-950 font-josefin">
+
+    <div 
+    class="inline-block absolute bg-center w-full h-1/4 bg-cover bg-(image:--image-mobile-lg) sm:bg-(image:--image-desktop-lg) 
+            dark:bg-(image:--image-mobile-dk) dark:md:bg-(image:--image-desktop-dk)
+    "></div>
+    
+    <section class="fixed w-full px-8 md:px-32 lg:px-48 xl:px-64 2xl:px-102">
+        <article class="flex justify-between mt-10">
+
+          <h2 class="uppercase text-gray-50 text-2xl font-bold tracking-[0.5rem] ">Todo</h2>
+
+          <label class="">
+            <input type="checkbox" id="mode" class="hidden peer">
+            <span class="bg-(image:--image-moon) bg-center bg-cover inline-block size-6 peer-checked:hidden cursor-pointer" ></span>
+            <span class="bg-(image:--image-sun) bg-center bg-cover hidden size-6 peer-checked:inline-block cursor-pointer" ></span>
+          </label>
+
+        </article>
+
+        <article class="mt-10">
+          <div class="bg-gray-50 dark:bg-navy-900 px-4 py-3 rounded-lg">
+            <label class="w-full relative" >
+              <span class=" absolute transform top-1/2 -translate-y-1/2 size-6 rounded-full border border-gray-600"></span>
+              <input type="text" id="text" placeholder="Create a new todo..." class="ml-8 text-sm w-[calc(100%-2rem)] outline-none text-navy-850 dark:text-purple-300" >
+            </label>
+          </div>
+
+          <span id="errorText" class="hidden text-sm text-center text-gray-50 mt-5" >The text must have at least 1 character</span>
+
+          <ul id="list" class="mt-6 bg-white dark:bg-navy-900 rounded-lg  shadow-2xl flex flex-col-reverse">
+
+            <li 
+            id="options"
+            class=" px-4 py-3 flex justify-between items-center">
+              <p 
+              id="numberNotes"
+              class="text-gray-600 font-medium text-base" ></p>
+
+              <div class="hidden lg:block">
+                <article 
+                id="types"
+                class=" flex space-x-7 ">
+                  <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+                    <input type="radio" name="option" checked value="all" class="hidden">
+                    <h4 class="cursor-pointer text-base font-semibold" onclick="changeType('all')"  >All</h4>
+                  </label>
+                  <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+                    <input type="radio" name="option" value="active" class="hidden">
+                    <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('active')" >Active</h4>
+                  </label>
+                  <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+                    <input type="radio" name="option" value="completed" class="hidden">
+                    <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('completed')" >Completed</h4>
+                  </label>
+                </article>
+              </div>
+
+              <p 
+              id="clearAll"
+              class="text-gray-600 font-medium text-base cursor-pointer hover:text-navy-850">Clear Completed</p>
+            </li>
+
+          </ul>
+
+        </article>
+
+      <article 
+      id="types"
+      class="bg-white border rounded-lg border-gray-300 dark:bg-navy-900 dark:border-0 py-3 shadow-2xl flex justify-evenly mt-6 lg:hidden">
+        <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+          <input type="radio" name="option-mobile" checked value="all" class="hidden">
+          <h4 class="cursor-pointer text-base font-semibold" onclick="changeType('all')"  >All</h4>
+        </label>
+        <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+          <input type="radio" name="option" value="active" class="hidden">
+          <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('active')" >Active</h4>
+        </label>
+        <label class="text-gray-600 has-checked:text-blue hover:text-gray-30">
+          <input type="radio" name="option" value="completed" class="hidden">
+          <h4 class="cursor-pointer text-base   font-semibold" onclick="changeType('completed')" >Completed</h4>
+        </label>
+      </article>
+
+    </section>
+
+  </div>
+
+  <div 
+  id="message"
+  class="hidden z-50 bg-navy-850 flex-wrap w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 text-center animate-pulse dark:bg-navy-900 absolute text-gray-50 px-4 py-2 transform rounded-lg bottom-4 left-1/2 -translate-x-1/2 shadow">
+  </div>
+
+  <div 
+  id="dialogContinue"
+  class="hidden bg-gray-50 border-2 border-gray-600 shadow-2xl space-y-5 w-4/5 sm:w-3/5 md:w-2/5  px-4 py-3 rounded-lg absolute transform top-1/5 -translate-y-1/5 left-1/2 -translate-x-1/2">
+    <h4 class="text-navy-950" >Do you want to continue with this procces?</h4>
+    <div class="flex justify-between">
+      <button 
+      id="close"
+      type="button" class="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer" >Cancel</button>
+      <button 
+      id="accept"
+      type="button" class="bg-navy-950 px-4 py-2 rounded-lg text-white cursor-pointer" >Continue</button>
+    </div>
+  </div>
+
+  <div 
+  id="dialogChange"
+  class="hidden bg-gray-50 border-2 border-gray-600 shadow-2xl space-y-5 w-4/5 sm:w-3/5 md:w-2/5  px-4 py-3 rounded-lg absolute transform top-1/5 -translate-y-1/5 left-1/2 -translate-x-1/2">
+    <h4 class="text-navy-950" >Do you want to change the status of this note?</h4>
+    <div class="flex justify-between">
+      <button 
+      id="closeChange"
+      type="button" class="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer" >Cancel</button>
+      <button 
+      id="acceptChange"
+      type="button" class="bg-navy-950 px-4 py-2 rounded-lg text-white cursor-pointer" >Continue</button>
+    </div>
+  </div>
+
+  <div class="attribution absolute bottom-0 transform left-1/2 -translate-x-1/2">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Jeremy</a>.
+  </div>
+
+  <script src="./script.js"></script>
+
+</body>
+</html>
