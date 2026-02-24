@@ -25,10 +25,10 @@ inputText.addEventListener('keydown',(e) => {
         }, 1000);
     }else{
         /* Message of error */
-        showErrorText();
+        /* showErrorText();
         setTimeout(() => {
             hiddenErrorText();
-        }, 1000);
+        }, 1000); */
     }
 })
 
